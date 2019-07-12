@@ -1,9 +1,35 @@
-<mvc:View controllerName="com.chlv.samples.controller.App" xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns="sap.m">
+<mvc:View
+	controllerName="com.chlv.samples.controller.App"
+	xmlns="sap.m"
+	xmlns:l="sap.ui.layout"
+	xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc"
+	displayBlock="true">
 	<Shell id="shell">
 		<App id="app">
 			<pages>
 				<Page id="page" title="{i18n>title}">
-					<content></content>
+					<content>
+						
+						<!-- Counter Panel -->
+						<Panel
+							id="counterPanel"
+							headerText="{i18n>textCounterPanel}"
+							width="100%"
+							height="auto"
+							expandable="true"
+							expanded="true">
+							<l:VerticalLayout width="100%">
+								<Button id="pressMeButton" text="{i18n>textPressMeButton}" press=".onPress"/>
+								<Button id="clickMeButton" text="{i18n>textClickMeButton}" press=".onPress"/>
+								<Label text="{i18n>textPressMeLabel}" labelFor="pressMeCounter"/>
+								<Input id="pressMeCounter" value="0" enabled="false" width="50%"/>
+								<Label text="{i18n>textClickMeLabel}" labelFor="clickMeCounter"/>
+								<Input id="clickMeCounter" value="0" enabled="false" width="50%"/>
+							</l:VerticalLayout>
+						</Panel>
+						
+					</content>
 				</Page>
 			</pages>
 		</App>
