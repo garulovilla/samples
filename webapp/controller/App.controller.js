@@ -31,7 +31,11 @@ sap.ui.define([
 
 			// Set default model
 			var oModel = new JSONModel(oData);
+			oModel.setDefaultBindingMode("OneWay");
 			oView.setModel(oModel);
+			
+			// Set text toogle controls button
+			this._setTextToogleControlsButton(oData.enabled);
 		},
 		
 		onPress: function (oEvent) {
@@ -68,6 +72,28 @@ sap.ui.define([
 
 			// Show message
 			MessageToast.show(sMessage);
+		},
+		
+		onToogleEnabledControls: function () {
+			var oModel = this.getView().getModel();
+			var bNewEnabled = oModel.getProperty("/enabled") ? false : true;
+			oModel.setProperty("/enabled", bNewEnabled);
+			this._setTextToogleControlsButton(bNewEnabled);
+		},
+		
+		_setTextToogleControlsButton: function (bEnabled) {
+			var oToogleControlsButton = this.byId("toogleControlsButton");
+
+			if (bEnabled) {
+				oToogleControlsButton.setText(this._getTextResourceBundle("textDisableControlsButton"));
+			} else {
+				oToogleControlsButton.setText(this._getTextResourceBundle("textEnableControlsButton"));
+			}
+		},
+		
+		_getTextResourceBundle: function (sKey, aArgs) {
+			var oResourceBundle = this.getView().getModel("i18n").getResourceBundle();
+			return oResourceBundle.getText(sKey, aArgs);
 		}
 		
 	});

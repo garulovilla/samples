@@ -40,6 +40,8 @@
 							<l:VerticalLayout width="100%">
 								<!-- Enabled -->
 								<CheckBox text="{i18n>textEnabledCheckBox}" selected="{/enabled}"/>
+								<!-- Toogle controls -->
+								<Button id="toogleControlsButton" press=".onToogleEnabledControls"/>
 								<!-- First Name -->
 								<Label text="{i18n>textFirstNameLabel}" labelFor="firstName"/>
 								<Input id="firstName" value="{/firstName}" enabled="{/enabled}"/>
