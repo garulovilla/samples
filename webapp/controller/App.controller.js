@@ -36,6 +36,10 @@ sap.ui.define([
 			
 			// Set text toogle controls button
 			this._setTextToogleControlsButton(oData.enabled);
+			
+			// Set binding element relativeAddressContainer
+			var oRelativeAddressContainer = this.byId("relativeAddressContainer");
+			oRelativeAddressContainer.bindElement("/address");
 		},
 		
 		onPress: function (oEvent) {
