@@ -1,15 +1,37 @@
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
-	"sap/m/MessageToast"
-], function (Controller, MessageToast) {
+	"sap/m/MessageToast",
+	"sap/ui/model/json/JSONModel"
+], function (Controller, MessageToast, JSONModel) {
 	"use strict";
 	
 	var iCounterPressMe = 0,
 		iCounterClickMe = 0;
 	
 	return Controller.extend("com.chlv.samples.controller.App", {
+		
 		onInit: function () {
+			var oView = this.getView();
+			
+			// Data for default model
+			var oData = {
+				enabled: true,
+				firstName: "Firstname",
+				lastName: "Lastname",
+				gender: "M",
+				birthday: "1990/01/01",
+				address: {
+					street: "Street",
+					zip: "00000",
+					city: "City",
+					country: "Country",
+					number: "0-00-00-00"
+				}
+			};
 
+			// Set default model
+			var oModel = new JSONModel(oData);
+			oView.setModel(oModel);
 		},
 		
 		onPress: function (oEvent) {

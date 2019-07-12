@@ -18,7 +18,7 @@
 							width="100%"
 							height="auto"
 							expandable="true"
-							expanded="true">
+							expanded="false">
 							<l:VerticalLayout width="100%">
 								<Button id="pressMeButton" text="{i18n>textPressMeButton}" press=".onPress"/>
 								<Button id="clickMeButton" text="{i18n>textClickMeButton}" press=".onPress"/>
@@ -29,6 +29,56 @@
 							</l:VerticalLayout>
 						</Panel>
 						
+						<!-- Default JSON Model Panel -->
+						<Panel
+							id="defaultJSONModelPanel"
+							headerText="{i18n>textDefaultJSONModelPanel}"
+							width="100%"
+							height="auto"
+							expandable="true"
+							expanded="true">
+							<l:VerticalLayout width="100%">
+								<!-- Enabled -->
+								<CheckBox text="{i18n>textEnabledCheckBox}" selected="{/enabled}"/>
+								<!-- First Name -->
+								<Label text="{i18n>textFirstNameLabel}" labelFor="firstName"/>
+								<Input id="firstName" value="{/firstName}" enabled="{/enabled}"/>
+								<!-- Last Name -->
+								<Label text="{i18n>textLastNameLabel}" labelFor="lastName"/>
+								<Input id="lastName" value="{/lastName}" enabled="{/enabled}"/>
+								<!-- Gender -->
+								<Label text="{i18n>textGenderLabel}" labelFor="gender"/>
+								<Input id="gender" value="{/gender}" enabled="{/enabled}"/>
+								<!-- Birthday -->
+								<Label text="{i18n>textBirthdayLabel}" labelFor="birthday"/>
+								<Input id="birthday" value="{/birthday}" enabled="{/enabled}"/>
+								<!-- Address -->
+								<l:Grid>
+									<!-- Absolute Address -->
+									<VBox id="absoluteAddressContainer">
+										<layoutData>
+											<l:GridData span="XL12 L12 M12 S12"/>
+										</layoutData>
+										<Title level="H2" text="{i18n>textAbsoluteAddressTitle}" class="sapUiSmallMarginTopBottom"/>
+										<!-- Absolute Street -->
+										<Label text="{i18n>textStreeLabel}" labelFor="absoluteStreet"/>
+										<Input id="absoluteStreet" value="{/address/street}" enabled="{/enabled}"/>
+										<!-- Absolute City -->
+										<Label text="{i18n>textCityLabel}" labelFor="absoluteCity"/>
+										<Input id="absoluteCity" value="{/address/city}" enabled="{/enabled}"/>
+										<!-- Absolute ZIP -->
+										<Label text="{i18n>textZipLabel}" labelFor="absoluteZip"/>
+										<Input id="absoluteZip" value="{/address/zip}" enabled="{/enabled}"/>
+										<!-- Absolute Country -->
+										<Label text="{i18n>textCountryLabel}" labelFor="absoluteCountry"/>
+										<Input id="absoluteCountry" value="{/address/country}" enabled="{/enabled}"/>
+										<!-- Absolute Number -->
+										<Label text="{i18n>textNumberLabel}" labelFor="absoluteNumber"/>
+										<Input id="absoluteNumber" value="{/address/number}" enabled="{/enabled}"/>
+									</VBox>
+								</l:Grid>
+							</l:VerticalLayout>
+						</Panel>
 					</content>
 				</Page>
 			</pages>
