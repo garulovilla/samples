@@ -349,8 +349,8 @@
 										}"
 										width="90%"/>
 								</HBox>
-								
-								<!-- Formatted Birthday -->
+                                
+                                <!-- Formatted Birthday -->
 								<Label text="{i18n>formattedBirthday}" labelFor="formattedBirthday"/>
 								<Input 
 									id="formattedBirthday"
@@ -363,6 +363,42 @@
 											{path: 'formatting>/birthday/year'}
 										],
 										formatter: '.formatBirthday'
+									}"
+									width="60%"/>
+								
+								<!-- Purchase > Creation > Date -->
+								<Label text="{i18n>textPurchaseCreationDateLabel}" labelFor="purchaseCreationDate"/>
+								<Input
+									id="purchaseCreationDate"
+									class="sapUiTinyMarginBottom"
+									editable="false"
+									value="{
+										path: 'formatting>/purchase/creation/date',
+										type: 'sap.ui.model.type.Date',
+										formatOptions: {
+											source: {
+												pattern: 'yyyyMMdd'
+											},
+											style: 'long'
+										}
+									}"
+									width="60%"/>
+								
+								<!-- Purchase > Creation > Time -->
+								<Label text="{i18n>textPurchaseCreationTimeLabel}" labelFor="purchaseCreationTime"/>
+								<Input
+									id="purchaseCreationTime"
+									class="sapUiTinyMarginBottom"
+									editable="false"
+									value="{
+										path: 'formatting>/purchase/creation/time',
+										type: 'sap.ui.model.type.Time',
+										formatOptions: {
+											source: {
+												pattern: 'hhmmss'
+											},
+											style: 'medium'
+										}
 									}"
 									width="60%"/>
 							</VBox>

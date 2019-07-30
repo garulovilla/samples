@@ -52,6 +52,12 @@ sap.ui.define([
 					day: 12,
 					month: 10,
 					year: 94
+				},
+				purchase: {
+					creation: {
+						date: "20190621",
+						time: "235900"
+					}
 				}
 			});
 			oView.setModel(oFormattingModel, "formatting");
