@@ -34,6 +34,11 @@ sap.ui.define([
 			oModel.setDefaultBindingMode("OneWay");
 			oView.setModel(oModel);
 			
+			// Set products model
+			var oProductCollection = new JSONModel("model/ProductCollection.json");
+			oProductCollection.setDefaultBindingMode("OneWay");
+			oView.setModel(oProductCollection, "products");
+			
 			// Set text toogle controls button
 			this._setTextToogleControlsButton(oData.enabled);
 			
@@ -83,6 +88,40 @@ sap.ui.define([
 			var bNewEnabled = oModel.getProperty("/enabled") ? false : true;
 			oModel.setProperty("/enabled", bNewEnabled);
 			this._setTextToogleControlsButton(bNewEnabled);
+		},
+		
+		onChangeProductIndex: function (oEvent) {
+			var sIndex = oEvent.getParameter("value");
+
+			// If index is empty return
+			if (!sIndex) {
+				return;
+			}
+
+			var oModel = this.getView().getModel("products");
+			var oProduct = oModel.getObject("/" + sIndex);
+			var oProductDetailsContainer = this.byId("productDetailsContainer");
+			var oProductObjectTextArea = this.byId("productObject");
+			var sMessage = "";
+
+			// Check if product exist
+			if (!oProduct) {
+				oProductDetailsContainer.unbindElement("products");
+				oProductObjectTextArea.setValue("");
+				sMessage = this._getTextResourceBundle("messageProductNotFound");
+				MessageToast.show(sMessage);
+				return;
+			}
+
+			// Update text area value
+			oProductObjectTextArea.setValue(JSON.stringify(oProduct, null, "\t"));
+
+			// Set new bind element [sap.ui.core.Element]
+			oProductDetailsContainer.bindElement("products>/" + sIndex);
+
+			// Show message
+			sMessage = this._getTextResourceBundle("messageDisplayingDetails", [oProduct.ProductId, sIndex]);
+			MessageToast.show(sMessage);
 		},
 		
 		_setTextToogleControlsButton: function (bEnabled) {

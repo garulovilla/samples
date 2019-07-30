@@ -36,7 +36,7 @@
 							width="100%"
 							height="auto"
 							expandable="true"
-							expanded="true">
+							expanded="false">
 							<l:VerticalLayout width="100%">
 								<!-- Enabled -->
 								<CheckBox text="{i18n>textEnabledCheckBox}" selected="{/enabled}"/>
@@ -102,6 +102,52 @@
 									</VBox>
 								</l:Grid>
 							</l:VerticalLayout>
+						</Panel>
+						
+						<!-- Product Index Panel -->
+						<Panel
+							id="productsPanel"
+							headerText="{i18n>textProductIndexPanel}"
+							width="100%"
+							expandable="true"
+							expanded="true">
+							<l:Grid>
+								<!-- Product Index -->
+								<VBox>
+									<layoutData>
+										<l:GridData span="XL2 L2 M2 S12"/>
+									</layoutData>
+									<Label text="{i18n>textProductIndexLabel}" labelFor="productIndex"/>
+									<Input
+										id="productIndex"
+										value="0"
+										type="Number"
+										placeholder="{i18n>placeholderProductIndexInput}"
+										submit=".onChangeProductIndex"/>
+								</VBox>
+								<VBox>
+									<layoutData>
+										<l:GridData span="XL6 L6 M6 S12"/>
+									</layoutData>
+									<Label text="{i18n>textProductObjectLabel}" labelFor="productObject"/>
+									<TextArea id="productObject" enabled="false" rows="10" cols="70" width="100%"/>
+								</VBox>
+								<!-- Product Details -->
+								<VBox id="productDetailsContainer">
+									<layoutData>
+										<l:GridData span="XL4 L4 M4 S12"/>
+									</layoutData>
+									<!-- Product ID -->
+									<Label text="{i18n>textProductIdLabel}" labelFor="productId"/>
+									<Input id="productId" value="{products>ProductId}" enabled="false"/>
+									<!-- Product Name -->
+									<Label text="{i18n>textProductNameLabel}" labelFor="productName"/>
+									<Input id="productName" value="{products>Name}" enabled="false"/>
+									<!-- Product Price -->
+									<Label text="{i18n>textProductPriceLabel}" labelFor="productPrice"/>
+									<Input id="productPrice" value="{products>Price}" enabled="false"/>
+								</VBox>
+							</l:Grid>
 						</Panel>
 					</content>
 				</Page>
