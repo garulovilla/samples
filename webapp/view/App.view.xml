@@ -110,7 +110,7 @@
 							headerText="{i18n>textProductIndexPanel}"
 							width="100%"
 							expandable="true"
-							expanded="true">
+							expanded="false">
 							<l:Grid>
 								<!-- Product Index -->
 								<VBox>
@@ -149,6 +149,60 @@
 								</VBox>
 							</l:Grid>
 						</Panel>
+						
+						<!-- Product Selection Panel -->
+						<Panel
+							id="productSelectionPanel"
+							headerText="{i18n>textSelectProductPanel}"
+							width="100%"
+							height="auto"
+							expandable="true"
+							expanded="true">
+							<l:Grid>
+								<!-- Product Selection -->
+								<VBox>
+									<layoutData>
+										<l:GridData span="XL3 L3 M3 S12"/>
+									</layoutData>
+									<!-- Select -->
+									<Label text="{i18n>textSelectProductLabel}" labelFor="productsSelection"/>
+									<Select
+										id="productsSelection"
+										width="100%"
+										forceSelection="false"
+										items="{products>/}"
+										change=".onProductSelectionChange">
+										<items>
+											<core:Item key="{products>ProductId}" text="{products>ProductId} - {products>Name}"/>
+										</items>
+									</Select>
+								</VBox>
+								<!-- Product Selected -->
+								<VBox>
+									<layoutData>
+										<l:GridData span="XL5 L5 M5 S12"/>
+									</layoutData>
+									<Label text="{i18n>textProductObjectLabel}" labelFor="productSelected"/>
+									<TextArea id="productSelected" enabled="false" rows="10" cols="70" width="100%"/>
+								</VBox>
+								<!-- Product Selected Details -->
+								<VBox id="productSelectedDetailsContainer">
+									<layoutData>
+										<l:GridData span="XL4 L4 M4 S12"/>
+									</layoutData>
+									<!-- Product ID -->
+									<Label text="{i18n>textProductIdLabel}" labelFor="productSelectedId"/>
+									<Input id="productSelectedId" value="{products>ProductId}" enabled="false"/>
+									<!-- Product Name -->
+									<Label text="{i18n>textProductNameLabel}" labelFor="productSelectedName"/>
+									<Input id="productSelectedName" value="{products>Name}" enabled="false"/>
+									<!-- Product Price -->
+									<Label text="{i18n>textProductPriceLabel}" labelFor="productSelectedPrice"/>
+									<Input id="productSelectedPrice" value="{products>Price}" enabled="false"/>
+								</VBox>
+							</l:Grid>
+						</Panel>
+						
 					</content>
 				</Page>
 			</pages>
