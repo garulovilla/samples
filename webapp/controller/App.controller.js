@@ -10,6 +10,9 @@ sap.ui.define([
 	
 	return Controller.extend("com.chlv.samples.controller.App", {
 		
+		// Lifecycle hooks
+		// --------------------------------------------------------------------------------
+		
 		onInit: function () {
 			var oView = this.getView();
 			
@@ -41,6 +44,9 @@ sap.ui.define([
 			var oRelativeAddressContainer = this.byId("relativeAddressContainer");
 			oRelativeAddressContainer.bindElement("/address");
 		},
+		
+		// Handlers
+		// --------------------------------------------------------------------------------
 		
 		onPress: function (oEvent) {
 			var iCounter = 0;
@@ -81,9 +87,13 @@ sap.ui.define([
 		onToogleEnabledControls: function () {
 			var oModel = this.getView().getModel();
 			var bNewEnabled = oModel.getProperty("/enabled") ? false : true;
+			
 			oModel.setProperty("/enabled", bNewEnabled);
 			this._setTextToogleControlsButton(bNewEnabled);
 		},
+		
+		// Private
+		// --------------------------------------------------------------------------------
 		
 		_setTextToogleControlsButton: function (bEnabled) {
 			var oToogleControlsButton = this.byId("toogleControlsButton");
