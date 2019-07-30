@@ -349,6 +349,22 @@
 										}"
 										width="90%"/>
 								</HBox>
+								
+								<!-- Formatted Birthday -->
+								<Label text="{i18n>formattedBirthday}" labelFor="formattedBirthday"/>
+								<Input 
+									id="formattedBirthday"
+									class="sapUiTinyMarginBottom"
+									editable="false"
+									value="{
+										parts: [
+											{path: 'formatting>/birthday/day'},
+											{path: 'formatting>/birthday/month'},
+											{path: 'formatting>/birthday/year'}
+										],
+										formatter: '.formatBirthday'
+									}"
+									width="60%"/>
 							</VBox>
 						</Panel>
 						

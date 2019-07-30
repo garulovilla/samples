@@ -47,7 +47,12 @@ sap.ui.define([
 				gender: "F",
 				firstName: "Leticia",
 				lastName: "Ramírez",
-				balance: 98765.123456789
+				balance: 98765.123456789,
+				birthday: {
+					day: 12,
+					month: 10,
+					year: 94
+				}
 			});
 			oView.setModel(oFormattingModel, "formatting");
 			
@@ -176,6 +181,24 @@ sap.ui.define([
 			}
 
 			return sTitle + " " + sFirstName + " " + sLastName;
+		},
+		
+		formatBirthday: function (iDay, iMonth, iYear) {
+			var aPrefix = ["", "", ""];
+
+			if (iYear >= 0 && iYear <= 99) {
+				aPrefix[0] = "19";
+			}
+
+			if (iMonth >= 1 && iMonth <= 9) {
+				aPrefix[1] = "0";
+			}
+
+			if (iDay >= 1 && iDay <= 9) {
+				aPrefix[2] = "0";
+			}
+
+			return aPrefix[0] + iYear + "/" + aPrefix[1] + iMonth + "/" + aPrefix[2] + iDay;
 		},
         
         // Private
