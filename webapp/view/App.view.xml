@@ -261,7 +261,7 @@
 							width="100%"
 							height="auto"
 							expandable="true"
-							expanded="true">
+							expanded="false">
 							<VBox>
 								<!-- Welcome -->
 								<Label text="{i18n>textWelcomeLabel}" labelFor="welcome"/>
@@ -432,6 +432,69 @@
 									</items>
 								</Select>
 							</VBox>
+						</Panel>
+						
+						<!-- Dynamic Binding Panel -->
+						<Panel
+							id="dynamicBindingPropertyPanel"
+							headerText="{i18n>textDynamicBindingPropertyPanel}"
+							expandable="true"
+							expanded="true">
+							<l:Grid>
+								<!-- Model Data Container -->
+								<VBox renderType="Bare">
+									<layoutData>
+										<l:GridData span="XL6 L6 M6 S12"/>
+									</layoutData>
+									<!-- Model -->
+									<Label text="{i18n>textModelLabel}" labelFor="bindingModel"/>
+									<Select
+										id="bindingModel"
+										forceSelection="false"
+										selectedKey="{models>/selected}"
+										items="{models>/info}"
+										change=".onChangeDataModel">
+										<core:Item key="{models>key}" text="{models>description} - {models>bindingMode}" />
+									</Select>
+									<!-- Model Data -->
+									<Label text="{i18n>textModelDataLabel}" labelFor="modelData"/>
+									<TextArea id="modelData" enabled="false" rows="10" width="100%"/>
+								</VBox>
+								<!-- Binding Property Container -->
+								<VBox renderType="Bare">
+									<layoutData>
+										<l:GridData span="XL6 L6 M6 S12"/>
+									</layoutData>
+									<!-- Path -->
+									<Label text="{i18n>textBindingPathLabel} - for model &quot;{models>/selected}&quot;" labelFor="bindingPath"/>
+									<HBox renderType="Bare">
+										<Input id="bindingPath" placeholder="{i18n>placeholderSetBindingButton}" submit=".onBindingProperty"/>
+										<Button
+											id="setBindingButton"
+											icon="sap-icon://display"
+											tooltip="{i18n>textSetBindingButton}"
+											press=".onBindingProperty"/>
+									</HBox>
+									<!-- Value --> 
+									<Label text="{i18n>textBindingValueLabel}" labelFor="bindingValue"/>
+									<HBox renderType="Bare">
+										<TextArea id="bindingObject" enabled="false" rows="10" width="100%"/>
+										<VBox>
+											<Button
+												id="edit"
+												icon="sap-icon://edit"
+												tooltip="{i18n>tooltipEditBindingValueButton}"
+												press=".onToogleEditBindingValue"/>
+											<Button
+												id="save"
+												icon="sap-icon://save"
+												enabled="false"
+												tooltip="{i18n>tooltipSaveBindingObjectButton}"
+												press=".onSaveBindingObject"/>
+										</VBox>
+									</HBox>
+								</VBox>
+							</l:Grid>
 						</Panel>
 						
 					</content>

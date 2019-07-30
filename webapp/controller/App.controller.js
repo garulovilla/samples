@@ -91,6 +91,9 @@ sap.ui.define([
 			});
 			oView.setModel(oFormattingModel, "formatting");
 			
+			// Set models model
+			this._setModelsModel();
+			
 			// Set text toogle controls button
 			this._setTextToogleControlsButton(oData.enabled);
 			
@@ -201,6 +204,44 @@ sap.ui.define([
 			// });
 		},
 		
+		onChangeDataModel: function () {
+			this._updateModelData();
+		},
+
+		onBindingProperty: function () {
+			var sModel = this.byId("bindingModel").getSelectedKey() || undefined,
+				sPath = this.byId("bindingPath").getValue(),
+				oBindingObject = this.byId("bindingObject"),
+				oModel = this.getView().getModel(sModel),
+				vObject = oModel.getObject(sPath);
+				
+			oBindingObject.setValue(JSON.stringify(vObject, null, "\t"));
+		},
+
+		onSubmitUpdateModelData: function () {
+			this._updateModelData();
+		},
+
+		onToogleEditBindingValue: function () {
+			var oInputBindingValue = this.byId("bindingObject"),
+				oSaveButton = this.byId("save"),
+				bNewEnabledValue = oInputBindingValue.getEnabled() ? false : true;
+			
+			oSaveButton.setEnabled(bNewEnabledValue);
+			oInputBindingValue.setEnabled(bNewEnabledValue);
+		},
+
+		onSaveBindingObject: function () {
+			var sModel = this.byId("bindingModel").getSelectedKey() || undefined,
+				sPath = this.byId("bindingPath").getValue(),
+				oBindingObject = this.byId("bindingObject"),
+				oModel = this.getView().getModel(sModel),
+				vData = JSON.parse(oBindingObject.getValue());
+
+			oModel.setProperty(sPath, vData);
+			this._updateModelData();
+		},
+		
 		// Formatter
 		// --------------------------------------------------------------------------------
 		
@@ -259,6 +300,46 @@ sap.ui.define([
 		_getTextResourceBundle: function (sKey, aArgs) {
 			var oResourceBundle = this.getView().getModel("i18n").getResourceBundle();
 			return oResourceBundle.getText(sKey, aArgs);
+		},
+		
+		_updateModelData: function () {
+			var sModel = this.byId("bindingModel").getSelectedKey(),
+				oModelDataTextArea = this.byId("modelData"),
+				oModel = this.getView().getModel(sModel ? sModel : undefined);
+
+			// Update text area
+			oModelDataTextArea.setValue(JSON.stringify(oModel.getData(), null, "\t"));
+		},
+		
+		_setModelsModel: function () {
+			var oModel = new JSONModel({
+				selected: "",
+				info: this._getModels()
+			});
+
+			this.getView().setModel(oModel, "models");
+		},
+
+		_getModels: function () {
+			/* eslint-disable sap-no-ui5base-prop */
+			
+			var oModels = this.getView().oModels,
+				aModels = [];
+
+			for (var sModelName in oModels) {
+				if ({}.hasOwnProperty.call(oModels, sModelName)) {
+					var oNewModel = {};
+					var oModelProperties = oModels[sModelName];
+					oNewModel.key = sModelName === "undefined" ? "" : sModelName;
+					oNewModel.description = sModelName === "undefined" ? "default" : sModelName;
+					oNewModel.bindingMode = oModelProperties.sDefaultBindingMode;
+					aModels.push(oNewModel);
+				}
+			}
+
+			return aModels;
+
+			/* eslint-enable sap-no-ui5base-prop */
 		}
 		
 	});
