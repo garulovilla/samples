@@ -210,7 +210,7 @@
 							width="100%"
 							height="auto"
 							expandable="true"
-							expanded="true">
+							expanded="false">
 							<Table
 								id="productTable"
 								headerText="{i18n>textProductTable}"
@@ -252,6 +252,72 @@
 									</ColumnListItem>
 								</items>
 							</Table>
+						</Panel>
+						
+						<!-- Composite Binding Panel -->
+						<Panel
+							id="formattingPanel"
+							headerText="{i18n>textCompositeBindingPanel}"
+							width="100%"
+							height="auto"
+							expandable="true"
+							expanded="true">
+							<VBox>
+								<!-- Welcome -->
+								<Label text="{i18n>textWelcomeLabel}" labelFor="welcome"/>
+								<Input
+									id="welcome"
+									class="sapUiTinyMarginBottom"
+									editable="false"
+									value="{i18n>goodDayText} {formatting>/firstName} {formatting>/lastName}"
+									width="60%"/>
+									
+								<!-- Balance -->
+								<Label text="{i18n>textBalanceLabel}" labelFor="balance"/>
+								<Input
+									id="balance"
+									class="sapUiTinyMarginBottom"
+									editable="false"
+									value="{
+										parts: [
+											'i18n>goodDayText',
+											'formatting>/firstName',
+											'i18n>yourBalanceText',
+											'formatting>/balance'
+										]
+									}"
+									width="60%"/>
+								
+								<!-- Formatted Balance -->
+								<Label text="{i18n>textFormattedBalanceLabel}" labelFor="formattedBalance"/>
+								<Input
+									id="formattedBalance"
+									class="sapUiTinyMarginBottom"
+									editable="false"
+									value="{
+										parts: [
+											{
+												path: 'i18n>goodDayText'
+											},
+											{
+												path: 'formatting>/firstName'
+											},
+											{
+												path: 'i18n>yourBalanceText'
+											},
+											{
+												path: 'formatting>/balance',
+												type: 'sap.ui.model.type.Float',
+												formatOptions: {
+													minIntegerDigits: 3,
+													minFractionDigits: 3,
+													maxFractionDigits: 3
+												}
+											}
+										]
+									}"
+									width="60%"/>
+							</VBox>
 						</Panel>
 						
 					</content>

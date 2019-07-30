@@ -42,6 +42,15 @@ sap.ui.define([
 			oProductCollection.setDefaultBindingMode("OneWay");
 			oView.setModel(oProductCollection, "products");
 			
+			// Set formatting model
+			var oFormattingModel = new JSONModel({
+				gender: "F",
+				firstName: "Leticia",
+				lastName: "Ramírez",
+				balance: 98765.123456789
+			});
+			oView.setModel(oFormattingModel, "formatting");
+			
 			// Set text toogle controls button
 			this._setTextToogleControlsButton(oData.enabled);
 			
