@@ -157,7 +157,7 @@
 							width="100%"
 							height="auto"
 							expandable="true"
-							expanded="true">
+							expanded="false">
 							<l:Grid>
 								<!-- Product Selection -->
 								<VBox>
@@ -201,6 +201,57 @@
 									<Input id="productSelectedPrice" value="{products>Price}" enabled="false"/>
 								</VBox>
 							</l:Grid>
+						</Panel>
+						
+						<!-- Product Table Panel -->
+						<Panel
+							id="productTablePanel"
+							headerText="{i18n>textProductTablePanel}"
+							width="100%"
+							height="auto"
+							expandable="true"
+							expanded="true">
+							<Table
+								id="productTable"
+								headerText="{i18n>textProductTable}"
+								items="{products>/}">
+								<columns>
+									<Column>
+										<Text text="{i18n>textProductIdColumn}"/>
+									</Column>
+									<Column>
+										<Text text="{i18n>textNameColumn}"/>
+									</Column>
+									<Column>
+										<Text text="{i18n>textCategoryColumn}"/>
+									</Column>
+									<Column>
+										<Text text="{i18n>textSupplierNameColumn}"/>
+									</Column>
+									<Column>
+										<Text text="{i18n>textWeightMeasureColumn}"/>
+									</Column>
+									<Column>
+										<Text text="{i18n>textQuantityColumn}"/>
+									</Column>
+									<Column>
+										<Text text="{i18n>textPriceColumn}"/>
+									</Column>
+								</columns>
+								<items>
+									<ColumnListItem>
+										<cells>
+											<Text text="{products>ProductId}"/>
+											<Text text="{products>Name}"/>
+											<Text text="{products>Category}"/>
+											<Text text="{products>SupplierName}"/>
+											<Text text="{products>WeightMeasure}"/>
+											<Text text="{products>Quantity}"/>
+											<Text text="{products>Price}"/>
+										</cells>
+									</ColumnListItem>
+								</items>
+							</Table>
 						</Panel>
 						
 					</content>
