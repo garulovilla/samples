@@ -58,7 +58,36 @@ sap.ui.define([
 						date: "20190621",
 						time: "235900"
 					}
-				}
+				},
+				contacts: [{
+					id: 1,
+					firstName: "Gretchen",
+					lastName: "Berg",
+					alias: "Mom",
+					group: "Family",
+					phone: "123-123-123"
+				}, {
+					id: 2,
+					firstName: "Joni",
+					lastName: "Bartlett",
+					alias: "Dad",
+					group: "Family",
+					phone: "234-234-234"
+				}, {
+					id: 3,
+					firstName: "Dillon",
+					lastName: "Randall",
+					alias: "",
+					group: "Work",
+					phone: "345-345-345"
+				}, {
+					id: 4,
+					firstName: "Rebekah",
+					lastName: "Cochran",
+					alias: "Boss",
+					group: "Work",
+					phone: "456-456-456"
+				}]
 			});
 			oView.setModel(oFormattingModel, "formatting");
 			
@@ -205,6 +234,13 @@ sap.ui.define([
 			}
 
 			return aPrefix[0] + iYear + "/" + aPrefix[1] + iMonth + "/" + aPrefix[2] + iDay;
+		},
+		
+		formatContactName: function (sFirstName, sLastName, sAlias, sPhone) {
+			if (sAlias) {
+				return `${sFirstName} ${sLastName} (${sAlias}) - ${sPhone}`;
+			}
+			return `${sFirstName} ${sLastName} - ${sPhone}`;
 		},
         
         // Private

@@ -402,6 +402,36 @@
 									}"
 									width="60%"/>
 							</VBox>
+							
+							<!-- Contacts -->
+							<VBox width="60%">
+								<Title
+									level="H2"
+									text="{i18n>textContactsTitle}"/>
+								<Text
+									text="{i18n>textNoContacts}"
+									visible="{=${formatting>/contacts}.length === 0 ? true : false}"/>
+								<Select
+									id="contacts"
+									items="{formatting>/contacts}"
+									visible="{=${formatting>/contacts}.length > 0 ? true : false}"
+									width="100%">
+									<items>
+										<core:ListItem
+											key="{formatting>id}"
+											text="{
+												parts: [
+													'formatting>firstName',
+													'formatting>lastName',
+													'formatting>alias',
+													'formatting>phone'
+												],
+												formatter: '.formatContactName'
+											}"
+											icon="{=${formatting>group} === 'Work' ? 'sap-icon://business-card' : 'sap-icon://group'}"/>
+									</items>
+								</Select>
+							</VBox>
 						</Panel>
 						
 					</content>
