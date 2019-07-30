@@ -318,6 +318,38 @@
 									}"
 									width="60%"/>
 							</VBox>
+							
+							<VBox>
+								<!-- Formated name -->
+								<Label text="{i18n>textFormattedNameLabel}" labelFor="formattedName"/>
+								<HBox
+									class="sapUiTinyMarginBottom"
+									alignItems="Center"
+									renderType="Bare"
+									width="60%">
+									
+									<!-- Gender icon -->
+									<core:Icon
+										class="sapUiSmallMarginEnd"
+										color="{= ${formatting>/gender} === 'M' ? 'blue' : 'pink' }"
+										size="2rem"
+										src="sap-icon://employee"
+										tooltip="{i18n>tooltipGenderIcon}"/>
+										
+									<Input
+										id="formattedName"
+										editable="false"
+										value="{
+											parts: [
+												{path: 'formatting>/gender'},
+												{path: 'formatting>/firstName'},
+												{path: 'formatting>/lastName'}
+											],
+											formatter: '.formatName'
+										}"
+										width="90%"/>
+								</HBox>
+							</VBox>
 						</Panel>
 						
 					</content>

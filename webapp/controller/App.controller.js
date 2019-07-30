@@ -160,6 +160,23 @@ sap.ui.define([
 			// 	model: "products"
 			// });
 		},
+		
+		// Formatter
+		// --------------------------------------------------------------------------------
+		
+		formatName: function (sGender, sFirstName, sLastName) {
+			var sTitle = "Mrs.";
+
+			if (sGender === "M") {
+				sTitle = "Mr.";
+			}
+
+			if (!sLastName) {
+				return sTitle + " " + sFirstName;
+			}
+
+			return sTitle + " " + sFirstName + " " + sLastName;
+		},
         
         // Private
 		// --------------------------------------------------------------------------------
