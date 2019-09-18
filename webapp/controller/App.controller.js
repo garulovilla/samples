@@ -4,18 +4,20 @@ sap.ui.define([
 	"sap/ui/model/json/JSONModel"
 ], function (Controller, MessageToast, JSONModel) {
 	"use strict";
-	
+
+	const DEFAULT_EXPANDED_PANEL = "LAST";
+
 	var iCounterPressMe = 0,
 		iCounterClickMe = 0;
-	
+
 	return Controller.extend("com.chlv.samples.controller.App", {
-		
+
 		// Lifecycle hooks
 		// --------------------------------------------------------------------------------
-		
+
 		onInit: function () {
 			var oView = this.getView();
-			
+
 			// Data for default model
 			var oData = {
 				enabled: true,
@@ -36,12 +38,12 @@ sap.ui.define([
 			var oModel = new JSONModel(oData);
 			oModel.setDefaultBindingMode("OneWay");
 			oView.setModel(oModel);
-			
+
 			// Set products model
 			var oProductCollection = new JSONModel("model/ProductCollection.json");
 			oProductCollection.setDefaultBindingMode("OneWay");
 			oView.setModel(oProductCollection, "products");
-			
+
 			// Set formatting model
 			var oFormattingModel = new JSONModel({
 				gender: "F",
@@ -90,20 +92,38 @@ sap.ui.define([
 				}]
 			});
 			oView.setModel(oFormattingModel, "formatting");
-			
+
+			// Get all the names of the panels and set a new JSON model with name "panels"
+			this._setPanelsModel();
+
 			// Set models model
 			this._setModelsModel();
-			
+
 			// Set text toogle controls button
 			this._setTextToogleControlsButton(oData.enabled);
-			
+
 			// Set binding element relativeAddressContainer
 			var oRelativeAddressContainer = this.byId("relativeAddressContainer");
 			oRelativeAddressContainer.bindElement("/address");
 		},
-		
+
 		// Handlers
 		// --------------------------------------------------------------------------------
+		
+		onExpandPanel: function (oEvent) {
+			var sPanelId = oEvent.getParameter("selectedItem").getKey(),
+				oPanelsModel = this.getView().getModel("panels"),
+				aPanels = oPanelsModel.getObject("/panels"),
+				oPanelToExpand = this.byId(sPanelId);
+
+			// Close all panels
+			aPanels.forEach(function (panel) {
+				this.byId(panel.id).setExpanded(false);
+			}.bind(this));
+
+			// Open selectd panel
+			oPanelToExpand.setExpanded(true);
+		},
 		
 		onPress: function (oEvent) {
 			var iCounter = 0;
@@ -140,15 +160,15 @@ sap.ui.define([
 			// Show message
 			MessageToast.show(sMessage);
 		},
-		
+
 		onToogleEnabledControls: function () {
 			var oModel = this.getView().getModel();
 			var bNewEnabled = oModel.getProperty("/enabled") ? false : true;
-			
+
 			oModel.setProperty("/enabled", bNewEnabled);
 			this._setTextToogleControlsButton(bNewEnabled);
 		},
-		
+
 		onChangeProductIndex: function (oEvent) {
 			var sIndex = oEvent.getParameter("value");
 
@@ -182,7 +202,7 @@ sap.ui.define([
 			sMessage = this._getTextResourceBundle("messageDisplayingDetails", [oProduct.ProductId, sIndex]);
 			MessageToast.show(sMessage);
 		},
-		
+
 		onProductSelectionChange: function (oEvent) {
 			var oSelectedProduct = oEvent.getParameter("selectedItem"),
 				oContext = oSelectedProduct.getBindingContext("products"),
@@ -203,7 +223,7 @@ sap.ui.define([
 			// 	model: "products"
 			// });
 		},
-		
+
 		onChangeDataModel: function () {
 			this._updateModelData();
 		},
@@ -214,7 +234,7 @@ sap.ui.define([
 				oBindingObject = this.byId("bindingObject"),
 				oModel = this.getView().getModel(sModel),
 				vObject = oModel.getObject(sPath);
-				
+
 			oBindingObject.setValue(JSON.stringify(vObject, null, "\t"));
 		},
 
@@ -226,7 +246,7 @@ sap.ui.define([
 			var oInputBindingValue = this.byId("bindingObject"),
 				oSaveButton = this.byId("save"),
 				bNewEnabledValue = oInputBindingValue.getEnabled() ? false : true;
-			
+
 			oSaveButton.setEnabled(bNewEnabledValue);
 			oInputBindingValue.setEnabled(bNewEnabledValue);
 		},
@@ -241,10 +261,10 @@ sap.ui.define([
 			oModel.setProperty(sPath, vData);
 			this._updateModelData();
 		},
-		
+
 		// Formatter
 		// --------------------------------------------------------------------------------
-		
+
 		formatName: function (sGender, sFirstName, sLastName) {
 			var sTitle = "Mrs.";
 
@@ -258,7 +278,7 @@ sap.ui.define([
 
 			return sTitle + " " + sFirstName + " " + sLastName;
 		},
-		
+
 		formatBirthday: function (iDay, iMonth, iYear) {
 			var aPrefix = ["", "", ""];
 
@@ -276,17 +296,17 @@ sap.ui.define([
 
 			return aPrefix[0] + iYear + "/" + aPrefix[1] + iMonth + "/" + aPrefix[2] + iDay;
 		},
-		
+
 		formatContactName: function (sFirstName, sLastName, sAlias, sPhone) {
 			if (sAlias) {
 				return `${sFirstName} ${sLastName} (${sAlias}) - ${sPhone}`;
 			}
 			return `${sFirstName} ${sLastName} - ${sPhone}`;
 		},
-        
-        // Private
+
+		// Private
 		// --------------------------------------------------------------------------------
-		
+
 		_setTextToogleControlsButton: function (bEnabled) {
 			var oToogleControlsButton = this.byId("toogleControlsButton");
 
@@ -296,12 +316,12 @@ sap.ui.define([
 				oToogleControlsButton.setText(this._getTextResourceBundle("textEnableControlsButton"));
 			}
 		},
-		
+
 		_getTextResourceBundle: function (sKey, aArgs) {
 			var oResourceBundle = this.getView().getModel("i18n").getResourceBundle();
 			return oResourceBundle.getText(sKey, aArgs);
 		},
-		
+
 		_updateModelData: function () {
 			var sModel = this.byId("bindingModel").getSelectedKey(),
 				oModelDataTextArea = this.byId("modelData"),
@@ -310,7 +330,67 @@ sap.ui.define([
 			// Update text area
 			oModelDataTextArea.setValue(JSON.stringify(oModel.getData(), null, "\t"));
 		},
-		
+
+		_setPanelsModel: function () {
+			var aControls = this.byId("page").getContent();
+			var oModel = new JSONModel({
+				panels: this._getPanels(aControls)
+			});
+
+			this.getView().setModel(oModel, "panels");
+			this._expandDefaultPanel();
+		},
+
+		_expandDefaultPanel: function () {
+			var oPanelsModel = this.getView().getModel("panels"),
+				aPanels = oPanelsModel.getObject("/panels"),
+				oPanelToExpand = null;
+
+			switch (DEFAULT_EXPANDED_PANEL) {
+				case "":
+				case "NONE":
+					break;
+				case "FIRST":
+					oPanelToExpand = aPanels[0] || null;
+					break;
+				case "LAST":
+					oPanelToExpand = aPanels[aPanels.length - 1] || null;
+					break;
+				default:
+					oPanelToExpand = aPanels.find(function (oPanel) {
+						return oPanel.id.endsWith(DEFAULT_EXPANDED_PANEL);
+					});
+					break;
+			}
+
+			if (oPanelToExpand) {
+				var oPanel = this.byId(oPanelToExpand.id);
+
+				oPanelsModel.setProperty("/selected", oPanelToExpand.id);
+				oPanel.setExpanded(true);
+			}
+		},
+
+		_getPanels: function (aControls) {
+			var aPanels = [],
+				oView = this.getView();
+
+			for (var oControl of aControls) {
+				var oMetadata = oControl.getMetadata();
+
+				if (oMetadata.getName() === "sap.m.Panel") {
+					var oPanel = {};
+					oPanel.id = oView.getLocalId(oControl.getId());
+					oPanel.text = oControl.getHeaderText();
+					aPanels.push(oPanel);
+				} else if (oMetadata.getName() === "sap.ui.core.mvc.XMLView") {
+					aPanels = aPanels.concat(this._getPanels(oControl.getContent()));
+				}
+			}
+
+			return aPanels;
+		},
+
 		_setModelsModel: function () {
 			var oModel = new JSONModel({
 				selected: "",
@@ -322,7 +402,7 @@ sap.ui.define([
 
 		_getModels: function () {
 			/* eslint-disable sap-no-ui5base-prop */
-			
+
 			var oModels = this.getView().oModels,
 				aModels = [];
 
@@ -341,6 +421,6 @@ sap.ui.define([
 
 			/* eslint-enable sap-no-ui5base-prop */
 		}
-		
+
 	});
 });

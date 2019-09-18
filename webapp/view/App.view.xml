@@ -9,8 +9,23 @@
 		<App id="app">
 			<pages>
 				<Page id="page" title="{i18n>title}">
+					<subHeader>
+						<Toolbar>
+							<ToolbarSpacer/>
+							<Select
+								id="panels"
+								forceSelection="false"
+								selectedKey="{panels>/selected}"
+								items="{panels>/panels}"
+								change=".onExpandPanel">
+								<items>
+									<core:Item key="{panels>id}" text="{panels>text}"/>
+								</items>
+							</Select>
+						</Toolbar>
+					</subHeader>
+					
 					<content>
-						
 						<!-- Counter Panel -->
 						<Panel
 							id="counterPanel"
@@ -439,7 +454,7 @@
 							id="dynamicBindingPropertyPanel"
 							headerText="{i18n>textDynamicBindingPropertyPanel}"
 							expandable="true"
-							expanded="true">
+							expanded="false">
 							<l:Grid>
 								<!-- Model Data Container -->
 								<VBox renderType="Bare">
@@ -496,7 +511,6 @@
 								</VBox>
 							</l:Grid>
 						</Panel>
-						
 					</content>
 				</Page>
 			</pages>
