@@ -7,9 +7,6 @@ sap.ui.define([
 
 	const DEFAULT_EXPANDED_PANEL = "LAST";
 
-	var iCounterPressMe = 0,
-		iCounterClickMe = 0;
-
 	return BaseController.extend("com.chlv.samples.controller.App", {
 
 		// Lifecycle hooks
