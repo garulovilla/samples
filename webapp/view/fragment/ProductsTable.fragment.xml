@@ -1,0 +1,56 @@
+<Table
+	xmlns="sap.m"
+	id="products"
+	headerText="{i18n>textProductTable}"
+	items="{products>/}">
+	<headerToolbar>
+		<Toolbar>
+			<ToolbarSpacer/>
+			<Label text="{i18n>textCategoryFilterLabel}" labelFor="categoryFilterInput"/>
+			<Input
+				id="categoryFilterInput"
+				type="Text"
+				placeholder="{i18n>placeholderCategoryFilterInput}"
+				showValueHelp="true"
+				valueHelpOnly="true"
+				width="15rem"
+				valueHelpRequest=".onValueHelpRequest"/>
+		</Toolbar>
+	</headerToolbar>
+	<columns>
+		<Column>
+			<Text text="{i18n>textProductIdColumn}"/>
+		</Column>
+		<Column>
+			<Text text="{i18n>textNameColumn}"/>
+		</Column>
+		<Column>
+			<Text text="{i18n>textCategoryColumn}"/>
+		</Column>
+		<Column>
+			<Text text="{i18n>textSupplierNameColumn}"/>
+		</Column>
+		<Column>
+			<Text text="{i18n>textWeightMeasureColumn}"/>
+		</Column>
+		<Column>
+			<Text text="{i18n>textQuantityColumn}"/>
+		</Column>
+		<Column>
+			<Text text="{i18n>textPriceColumn}"/>
+		</Column>
+	</columns>
+	<items>
+		<ColumnListItem>
+			<cells>
+				<Text text="{products>ProductId}"/>
+				<Text text="{products>Name}"/>
+				<Text text="{products>Category}"/>
+				<Text text="{products>SupplierName}"/>
+				<Text text="{products>WeightMeasure}"/>
+				<Text text="{products>Quantity}"/>
+				<Text text="{products>Price}"/>
+			</cells>
+		</ColumnListItem>
+	</items>
+</Table>

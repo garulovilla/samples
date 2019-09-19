@@ -48,5 +48,7 @@
 		<VBox>
 			<Button text="{i18n>textOpenHelloDialogButton}" press=".onOpenHelloDialog"/>
 		</VBox>
+		<!-- Category Filter -->
+		<core:Fragment id="productsTableWithCategoryFilter" fragmentName="com.chlv.samples.view.fragment.ProductsTable" type="XML"/>
 	</Panel>
 </mvc:View>

@@ -17,6 +17,10 @@
 			"productSource": {
 				"uri": "model/ProductCollection.json",
 				"type": "JSON"
+			},
+			"productStatsSource": {
+				"type": "JSON",
+				"uri": "model/ProductCollectionStats.json"
 			}
 		}
 	},
@@ -68,6 +72,13 @@
 			"products": {
 				"type": "sap.ui.model.json.JSONModel",
 				"dataSource": "productSource",
+				"settings": {
+					"defaultBindingMode ": "OneWay"
+				}
+			},
+			"productsStats": {
+				"type": "sap.ui.model.json.JSONModel",
+				"dataSource": "productStatsSource",
 				"settings": {
 					"defaultBindingMode ": "OneWay"
 				}
