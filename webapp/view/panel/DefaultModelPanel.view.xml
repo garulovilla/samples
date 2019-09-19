@@ -1,0 +1,79 @@
+<mvc:View
+	controllerName="com.chlv.samples.controller.panel.DefaultModelPanel"
+	xmlns="sap.m"
+	xmlns:l="sap.ui.layout"
+	xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc">
+	<Panel
+		id="defaultModelPanel"
+		headerText="{i18n>textDefaultModelPanel}"
+		width="100%"
+		expandable="true"
+		expanded="false">
+		<l:VerticalLayout width="100%">
+			<!-- Enabled -->
+			<CheckBox text="{i18n>textEnabledCheckBox}" selected="{/enabled}"/>
+			<!-- Toggle controls -->
+			<Button id="toggleControlsButton" text="" press=".onToggleEnabledControls"/>
+			<!-- First Name -->
+			<Label text="{i18n>textFirstNameLabel}" labelFor="firstName"/>
+			<Input id="firstName" value="{/firstName}" enabled="{/enabled}"/>
+			<!-- Last Name -->
+			<Label text="{i18n>textLastNameLabel}" labelFor="lastName"/>
+			<Input id="lastName" value="{/lastName}" enabled="{/enabled}"/>
+			<!-- Gender -->
+			<Label text="{i18n>textGenderLabel}" labelFor="gender"/>
+			<Input id="gender" value="{/gender}" enabled="{/enabled}"/>
+			<!-- Birthday -->
+			<Label text="{i18n>textBirthdayLabel}" labelFor="birthday"/>
+			<Input id="birthday" value="{/birthday}" enabled="{/enabled}"/>
+			<!-- Address -->
+			<l:Grid>
+				<!-- Absolute Address -->
+				<VBox id="absoluteAddressContainer">
+					<layoutData>
+						<l:GridData span="XL6 L6 M6 S12"/>
+					</layoutData>
+					<Title level="H2" text="{i18n>textAbsoluteAddressTitle}" class="sapUiSmallMarginTopBottom"/>
+					<!-- Absolute Street -->
+					<Label text="{i18n>textStreeLabel}" labelFor="absoluteStreet"/>
+					<Input id="absoluteStreet" value="{/address/street}" enabled="{/enabled}"/>
+					<!-- Absolute City -->
+					<Label text="{i18n>textCityLabel}" labelFor="absoluteCity"/>
+					<Input id="absoluteCity" value="{/address/city}" enabled="{/enabled}"/>
+					<!-- Absolute ZIP -->
+					<Label text="{i18n>textZipLabel}" labelFor="absoluteZip"/>
+					<Input id="absoluteZip" value="{/address/zip}" enabled="{/enabled}"/>
+					<!-- Absolute Country -->
+					<Label text="{i18n>textCountryLabel}" labelFor="absoluteCountry"/>
+					<Input id="absoluteCountry" value="{/address/country}" enabled="{/enabled}"/>
+					<!-- Absolute Number -->
+					<Label text="{i18n>textNumberLabel}" labelFor="absoluteNumber"/>
+					<Input id="absoluteNumber" value="{/address/number}" enabled="{/enabled}"/>
+				</VBox>
+				<!-- Relative Address -->
+				<VBox id="relativeAddressContainer">
+					<layoutData>
+						<l:GridData span="XL6 L6 M6 S12"/>
+					</layoutData>
+					<Title level="H2" text="{i18n>textRelativeAddressTitle}" class="sapUiSmallMarginTopBottom"/>
+					<!-- Relative Street -->
+					<Label text="{i18n>textStreeLabel}" labelFor="relativeStreet"/>
+					<Input id="relativeStreet" value="{street}" enabled="{/enabled}"/>
+					<!-- Relative City -->
+					<Label text="{i18n>textCityLabel}" labelFor="relativeCity"/>
+					<Input id="relativeCity" value="{city}" enabled="{/enabled}"/>
+					<!-- Relative ZIP -->
+					<Label text="{i18n>textZipLabel}" labelFor="relativeZip"/>
+					<Input id="relativeZip" value="{zip}" enabled="{/enabled}"/>
+					<!-- Relative Country -->
+					<Label text="{i18n>textCountryLabel}" labelFor="relativeCountry"/>
+					<Input id="relativeCountry" value="{country}" enabled="{/enabled}"/>
+					<!-- Relative Number -->
+					<Label text="{i18n>textNumberLabel}" labelFor="relativeNumber"/>
+					<Input id="relativeNumber" value="{number}" enabled="{/enabled}"/>
+				</VBox>
+			</l:Grid>
+		</l:VerticalLayout>
+	</Panel>
+</mvc:View>

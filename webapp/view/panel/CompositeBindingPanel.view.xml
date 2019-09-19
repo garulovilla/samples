@@ -1,0 +1,184 @@
+<mvc:View
+	controllerName="com.chlv.samples.controller.panel.CompositeBindingPanel"
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc">
+	<Panel
+		id="formattingPanel"
+		headerText="{i18n>textCompositeBindingPanel}"
+		width="100%"
+		height="auto"
+		expandable="true"
+		expanded="false">
+		<VBox>
+			<!-- Welcome -->
+			<Label text="{i18n>textWelcomeLabel}" labelFor="welcome"/>
+			<Input
+				id="welcome"
+				class="sapUiTinyMarginBottom"
+				editable="false"
+				value="{i18n>goodDayText} {formatting>/firstName} {formatting>/lastName}"
+				width="60%"/>
+				
+			<!-- Balance -->
+			<Label text="{i18n>textBalanceLabel}" labelFor="balance"/>
+			<Input
+				id="balance"
+				class="sapUiTinyMarginBottom"
+				editable="false"
+				value="{
+					parts: [
+						'i18n>goodDayText',
+						'formatting>/firstName',
+						'i18n>yourBalanceText',
+						'formatting>/balance'
+					]
+				}"
+				width="60%"/>
+			
+			<!-- Formatted Balance -->
+			<Label text="{i18n>textFormattedBalanceLabel}" labelFor="formattedBalance"/>
+			<Input
+				id="formattedBalance"
+				class="sapUiTinyMarginBottom"
+				editable="false"
+				value="{
+					parts: [
+						{
+							path: 'i18n>goodDayText'
+						},
+						{
+							path: 'formatting>/firstName'
+						},
+						{
+							path: 'i18n>yourBalanceText'
+						},
+						{
+							path: 'formatting>/balance',
+							type: 'sap.ui.model.type.Float',
+							formatOptions: {
+								minIntegerDigits: 3,
+								minFractionDigits: 3,
+								maxFractionDigits: 3
+							}
+						}
+					]
+				}"
+				width="60%"/>
+		</VBox>
+		
+		<VBox>
+			<!-- Formated name -->
+			<Label text="{i18n>textFormattedNameLabel}" labelFor="formattedName"/>
+			<HBox
+				class="sapUiTinyMarginBottom"
+				alignItems="Center"
+				renderType="Bare"
+				width="60%">
+				
+				<!-- Gender icon -->
+				<core:Icon
+					class="sapUiSmallMarginEnd"
+					color="{= ${formatting>/gender} === 'M' ? 'blue' : 'pink' }"
+					size="2rem"
+					src="sap-icon://employee"
+					tooltip="{i18n>tooltipGenderIcon}"/>
+					
+				<Input
+					id="formattedName"
+					editable="false"
+					value="{
+						parts: [
+							{path: 'formatting>/gender'},
+							{path: 'formatting>/firstName'},
+							{path: 'formatting>/lastName'}
+						],
+						formatter: '.formatName'
+					}"
+					width="90%"/>
+			</HBox>
+            
+            <!-- Formatted Birthday -->
+			<Label text="{i18n>formattedBirthday}" labelFor="formattedBirthday"/>
+			<Input 
+				id="formattedBirthday"
+				class="sapUiTinyMarginBottom"
+				editable="false"
+				value="{
+					parts: [
+						{path: 'formatting>/birthday/day'},
+						{path: 'formatting>/birthday/month'},
+						{path: 'formatting>/birthday/year'}
+					],
+					formatter: '.formatBirthday'
+				}"
+				width="60%"/>
+			
+			<!-- Purchase > Creation > Date -->
+			<Label text="{i18n>textPurchaseCreationDateLabel}" labelFor="purchaseCreationDate"/>
+			<Input
+				id="purchaseCreationDate"
+				class="sapUiTinyMarginBottom"
+				editable="false"
+				value="{
+					path: 'formatting>/purchase/creation/date',
+					type: 'sap.ui.model.type.Date',
+					formatOptions: {
+						source: {
+							pattern: 'yyyyMMdd'
+						},
+						style: 'long'
+					}
+				}"
+				width="60%"/>
+			
+			<!-- Purchase > Creation > Time -->
+			<Label text="{i18n>textPurchaseCreationTimeLabel}" labelFor="purchaseCreationTime"/>
+			<Input
+				id="purchaseCreationTime"
+				class="sapUiTinyMarginBottom"
+				editable="false"
+				value="{
+					path: 'formatting>/purchase/creation/time',
+					type: 'sap.ui.model.type.Time',
+					formatOptions: {
+						source: {
+							pattern: 'hhmmss'
+						},
+						style: 'medium'
+					}
+				}"
+				width="60%"/>
+		</VBox>
+		
+		<!-- Contacts -->
+		<VBox width="60%">
+			<Title
+				level="H2"
+				text="{i18n>textContactsTitle}"/>
+			<Text
+				text="{i18n>textNoContacts}"
+				visible="{=${formatting>/contacts}.length === 0 ? true : false}"/>
+			<Select
+				id="contacts"
+				items="{formatting>/contacts}"
+				visible="{=${formatting>/contacts}.length > 0 ? true : false}"
+				width="100%">
+				<items>
+					<core:ListItem
+						key="{formatting>id}"
+						text="{
+							parts: [
+								'formatting>firstName',
+								'formatting>lastName',
+								'formatting>alias',
+								'formatting>phone'
+							],
+							formatter: '.formatContactName'
+						}"
+						icon="{=${formatting>group} === 'Work' ? 'sap-icon://business-card' : 'sap-icon://group'}"/>
+				</items>
+			</Select>
+		</VBox>
+	</Panel>
+</mvc:View>
