@@ -10,12 +10,14 @@ sap.ui.define([
 		// ------------------------------------------------------------------------------------------------------------------------
 		
 		onInit: function() {
-			BaseController.prototype.onInit.apply(this, arguments);
-			
 			// Set new Text control with local rocket id
 			this.byId("localContainer").addItem(
 				new sap.m.Text({ text: `#${this.byId("localRocket").getId()}` })
 			);
+			
+			// Set binding element relativeAddressContainer from Address Fragment
+			this.byId("relativeAddressContainer").bindElement("/address");
+			this.byId(Fragment.createId("relativeAddressFragment", "relativeAddressContainer")).bindElement("/address");
 		},
 		
 		// Handlers

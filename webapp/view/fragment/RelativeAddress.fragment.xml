@@ -1,0 +1,23 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:l="sap.ui.layout"
+	xmlns:core="sap.ui.core">
+	<VBox id="relativeAddressContainer">
+		<Title level="H2" text="{i18n>textRelativeAddressTitle}" class="sapUiSmallMarginTopBottom"/>
+		<!-- Relative Street -->
+		<Label text="{i18n>textStreeLabel}" labelFor="relativeStreet"/>
+		<Input id="relativeStreet" value="{street}" enabled="{/enabled}"/>
+		<!-- Relative City -->
+		<Label text="{i18n>textCityLabel}" labelFor="relativeCity"/>
+		<Input id="relativeCity" value="{city}" enabled="{/enabled}"/>
+		<!-- Relative ZIP -->
+		<Label text="{i18n>textZipLabel}" labelFor="relativeZip"/>
+		<Input id="relativeZip" value="{zip}" enabled="{/enabled}"/>
+		<!-- Relative Country -->
+		<Label text="{i18n>textCountryLabel}" labelFor="relativeCountry"/>
+		<Input id="relativeCountry" value="{country}" enabled="{/enabled}"/>
+		<!-- Relative Number -->
+		<Label text="{i18n>textNumberLabel}" labelFor="relativeNumber"/>
+		<Input id="relativeNumber" value="{number}" enabled="{/enabled}"/>
+	</VBox>
+</core:FragmentDefinition>

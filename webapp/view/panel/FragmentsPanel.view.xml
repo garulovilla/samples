@@ -41,5 +41,8 @@
 			<Title text="Declarative way with id = &quot;myFragment&quot;"/>
 			<core:Fragment id="myFragment" fragmentName="com.chlv.samples.view.fragment.Rocket" type="XML"/>
 		</VBox>
+		<!-- Address -->
+		<core:Fragment fragmentName="com.chlv.samples.view.fragment.RelativeAddress" type="XML"/>
+		<core:Fragment id="relativeAddressFragment" fragmentName="com.chlv.samples.view.fragment.RelativeAddress" type="XML"/>
 	</Panel>
 </mvc:View>
