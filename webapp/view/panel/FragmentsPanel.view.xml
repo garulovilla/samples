@@ -32,5 +32,14 @@
 			<Title text="id = this.createId(&quot;myFragment&quot;)"/>
 			<Button text="{i18n>textFragmentInstantiationButton}" press=".onFragmentInstantiation(3)"/>
 		</VBox>
+		<!-- Declarative -->
+		<VBox id="declarativeContainer0" class="sapUiTinyMarginTopBottom customBorderPadding">
+			<Title text="Declarative way without id"/>
+			<core:Fragment fragmentName="com.chlv.samples.view.fragment.Rocket" type="XML"/>
+		</VBox>
+		<VBox id="declarativeContainer1" class="sapUiTinyMarginTopBottom customBorderPadding">
+			<Title text="Declarative way with id = &quot;myFragment&quot;"/>
+			<core:Fragment id="myFragment" fragmentName="com.chlv.samples.view.fragment.Rocket" type="XML"/>
+		</VBox>
 	</Panel>
 </mvc:View>

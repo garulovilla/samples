@@ -10,6 +10,9 @@ sap.ui.define([
 		// ------------------------------------------------------------------------------------------------------------------------
 		
 		onInit: function() {
+			BaseController.prototype.onInit.apply(this, arguments);
+			
+			// Set new Text control with local rocket id
 			this.byId("localContainer").addItem(
 				new sap.m.Text({ text: `#${this.byId("localRocket").getId()}` })
 			);
