@@ -1,9 +1,9 @@
 sap.ui.define([
-	"sap/ui/core/mvc/Controller"
-], function (Controller) {
+	"com/chlv/samples/controller/BaseController"
+], function (BaseController) {
 	"use strict";
 
-	return Controller.extend("com.chlv.samples.controller.panel.ProductSelectionPanel", {
+	return BaseController.extend("com.chlv.samples.controller.panel.ProductSelectionPanel", {
 		
 		// Handlers
 		// ------------------------------------------------------------------------------------------------------------------------
@@ -12,7 +12,7 @@ sap.ui.define([
 			var oSelectedProduct = oEvent.getParameter("selectedItem"),
 				oContext = oSelectedProduct.getBindingContext("products"),
 				sPath = oContext.getPath(),
-				oProductObject = this.getView().getModel("products").getObject(sPath),
+				oProductObject = this.getModel("products").getObject(sPath),
 				oProductSelected = this.byId("productSelected"),
 				oProductSelectedDetailsContainer = this.byId("productSelectedDetailsContainer");
 

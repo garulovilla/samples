@@ -1,15 +1,15 @@
 sap.ui.define([
-	"sap/ui/core/mvc/Controller",
-], function (Controller) {
+	"com/chlv/samples/controller/BaseController",
+], function (BaseController) {
 	"use strict";
 
-	return Controller.extend("com.chlv.samples.controller.panel.DefaultModelPanel", {
+	return BaseController.extend("com.chlv.samples.controller.panel.DefaultModelPanel", {
 		
 		// Lifecycle Hooks
 		// ------------------------------------------------------------------------------------------------------------------------
 		
 		onBeforeRendering:  function () {
-			var bEnable = this.getView().getModel().getProperty("/enabled");
+			var bEnable = this.getModel().getProperty("/enabled");
 			
 			// Set text toogle controls button
 			this._setTextToggleControlsButton(bEnable);
@@ -23,7 +23,7 @@ sap.ui.define([
 		// ------------------------------------------------------------------------------------------------------------------------
 		
 		onToggleEnabledControls: function () {
-			var oModel = this.getView().getModel();
+			var oModel = this.getModel();
 			var bNewEnabled = oModel.getProperty("/enabled") ? false : true;
 
 			oModel.setProperty("/enabled", bNewEnabled);
@@ -37,15 +37,10 @@ sap.ui.define([
 			var oToggleControlsButton = this.byId("toggleControlsButton");
 
 			if (bEnabled) {
-				oToggleControlsButton.setText(this._getTextResourceBundle("textDisableControlsButton"));
+				oToggleControlsButton.setText(this.getTextResourceBundle("textDisableControlsButton"));
 			} else {
-				oToggleControlsButton.setText(this._getTextResourceBundle("textEnableControlsButton"));
+				oToggleControlsButton.setText(this.getTextResourceBundle("textEnableControlsButton"));
 			}
-		},
-
-		_getTextResourceBundle: function (sKey, aArgs) {
-			var oResourceBundle = this.getView().getModel("i18n").getResourceBundle();
-			return oResourceBundle.getText(sKey, aArgs);
 		}
 
 	});

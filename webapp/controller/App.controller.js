@@ -1,8 +1,8 @@
 sap.ui.define([
-	"sap/ui/core/mvc/Controller",
+	"com/chlv/samples/controller/BaseController",
 	"sap/m/MessageToast",
 	"sap/ui/model/json/JSONModel"
-], function (Controller, MessageToast, JSONModel) {
+], function (BaseController, MessageToast, JSONModel) {
 	"use strict";
 
 	const DEFAULT_EXPANDED_PANEL = "LAST";
@@ -10,7 +10,7 @@ sap.ui.define([
 	var iCounterPressMe = 0,
 		iCounterClickMe = 0;
 
-	return Controller.extend("com.chlv.samples.controller.App", {
+	return BaseController.extend("com.chlv.samples.controller.App", {
 
 		// Lifecycle hooks
 		// ------------------------------------------------------------------------------------------------------------------------
@@ -105,7 +105,7 @@ sap.ui.define([
 		
 		onExpandPanel: function (oEvent) {
 			var sPanelId = oEvent.getParameter("selectedItem").getKey(),
-				oPanelsModel = this.getView().getModel("panels"),
+				oPanelsModel = this.getModel("panels"),
 				aPanels = oPanelsModel.getObject("/panels"),
 				oPanelToExpand = this.byId(sPanelId);
 
@@ -127,12 +127,12 @@ sap.ui.define([
 				panels: this._getPanels(aControls)
 			});
 
-			this.getView().setModel(oModel, "panels");
+			this.setModel(oModel, "panels");
 			this._expandDefaultPanel();
 		},
 
 		_expandDefaultPanel: function () {
-			var oPanelsModel = this.getView().getModel("panels"),
+			var oPanelsModel = this.getModel("panels"),
 				aPanels = oPanelsModel.getObject("/panels"),
 				oPanelToExpand = null;
 
@@ -187,7 +187,7 @@ sap.ui.define([
 				info: this._getModels()
 			});
 
-			this.getView().setModel(oModel, "models");
+			this.setModel(oModel, "models");
 		},
 
 		_getModels: function () {

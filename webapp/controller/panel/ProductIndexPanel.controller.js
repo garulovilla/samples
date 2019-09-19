@@ -1,10 +1,10 @@
 sap.ui.define([
-	"sap/ui/core/mvc/Controller",
+	"com/chlv/samples/controller/BaseController",
 	"sap/m/MessageToast"
-], function (Controller, MessageToast) {
+], function (BaseController, MessageToast) {
 	"use strict";
 
-	return Controller.extend("com.chlv.samples.controller.panel.ProductIndexPanel", {
+	return BaseController.extend("com.chlv.samples.controller.panel.ProductIndexPanel", {
 		
 		// Handlers
 		// ------------------------------------------------------------------------------------------------------------------------
@@ -17,7 +17,7 @@ sap.ui.define([
 				return;
 			}
 
-			var oModel = this.getView().getModel("products");
+			var oModel = this.getModel("products");
 			var oProduct = oModel.getObject("/" + sIndex);
 			var oProductDetailsContainer = this.byId("productDetailsContainer");
 			var oProductObjectTextArea = this.byId("productObject");
@@ -39,16 +39,8 @@ sap.ui.define([
 			oProductDetailsContainer.bindElement("products>/" + sIndex);
 
 			// Show message
-			sMessage = this._getTextResourceBundle("messageDisplayingDetails", [oProduct.ProductId, sIndex]);
+			sMessage = this.getTextResourceBundle("messageDisplayingDetails", [oProduct.ProductId, sIndex]);
 			MessageToast.show(sMessage);
-		},
-		
-		// Private
-		// ------------------------------------------------------------------------------------------------------------------------
-		
-		_getTextResourceBundle: function (sKey, aArgs) {
-			var oResourceBundle = this.getView().getModel("i18n").getResourceBundle();
-			return oResourceBundle.getText(sKey, aArgs);
 		}
 
 	});

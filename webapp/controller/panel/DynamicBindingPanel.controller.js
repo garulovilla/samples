@@ -1,9 +1,9 @@
 sap.ui.define([
-	"sap/ui/core/mvc/Controller"
-], function (Controller) {
+	"com/chlv/samples/controller/BaseController"
+], function (BaseController) {
 	"use strict";
 
-	return Controller.extend("com.chlv.samples.controller.panel.DynamicBindingPanel", {
+	return BaseController.extend("com.chlv.samples.controller.panel.DynamicBindingPanel", {
 		
 		// Handlers
 		// ------------------------------------------------------------------------------------------------------------------------
@@ -16,7 +16,7 @@ sap.ui.define([
 			var sModel = this.byId("bindingModel").getSelectedKey() || undefined,
 				sPath = this.byId("bindingPath").getValue(),
 				oBindingObject = this.byId("bindingObject"),
-				oModel = this.getView().getModel(sModel),
+				oModel = this.getModel(sModel),
 				vObject = oModel.getObject(sPath);
 
 			oBindingObject.setValue(JSON.stringify(vObject, null, "\t"));
@@ -39,7 +39,7 @@ sap.ui.define([
 			var sModel = this.byId("bindingModel").getSelectedKey() || undefined,
 				sPath = this.byId("bindingPath").getValue(),
 				oBindingObject = this.byId("bindingObject"),
-				oModel = this.getView().getModel(sModel),
+				oModel = this.getModel(sModel),
 				vData = JSON.parse(oBindingObject.getValue());
 
 			oModel.setProperty(sPath, vData);
@@ -52,7 +52,7 @@ sap.ui.define([
 		_updateModelData: function () {
 			var sModel = this.byId("bindingModel").getSelectedKey(),
 				oModelDataTextArea = this.byId("modelData"),
-				oModel = this.getView().getModel(sModel ? sModel : undefined);
+				oModel = this.getModel(sModel ? sModel : undefined);
 
 			// Update text area
 			oModelDataTextArea.setValue(JSON.stringify(oModel.getData(), null, "\t"));

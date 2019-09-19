@@ -1,9 +1,9 @@
 sap.ui.define([
-	"sap/ui/core/mvc/Controller"
-], function (Controller) {
+	"com/chlv/samples/controller/BaseController"
+], function (BaseController) {
 	"use strict";
 
-	return Controller.extend("com.chlv.samples.controller.panel.CompositeBindingPanel", {
+	return BaseController.extend("com.chlv.samples.controller.panel.CompositeBindingPanel", {
 		
 		// Formatter
 		// --------------------------------------------------------------------------------

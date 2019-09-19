@@ -1,13 +1,13 @@
 sap.ui.define([
-	"sap/ui/core/mvc/Controller",
+	"com/chlv/samples/controller/BaseController",
 	"sap/m/MessageToast"
-], function (Controller, MessageToast) {
+], function (BaseController, MessageToast) {
 	"use strict";
 	
 	var iCounterPressMe = 0,
 		iCounterClickMe = 0;
 	
-	return Controller.extend("com.chlv.sample.controller.panel.CounterPanel", {
+	return BaseController.extend("com.chlv.sample.controller.panel.CounterPanel", {
 		
 		// Handlers
 		// ------------------------------------------------------------------------------------------------------------------------
@@ -37,8 +37,7 @@ sap.ui.define([
 			oInputCounter.setValue(iCounter);
 
 			// Get message from resource bundle
-			var oResourceBundle = this.getView().getModel("i18n").getResourceBundle();
-			var sMessage = oResourceBundle.getText("messagePressedButton", [
+			var sMessage = this.getTextResourceBundle("messagePressedButton", [
 				oPressedButton.getText(),
 				iCounter
 			]);
