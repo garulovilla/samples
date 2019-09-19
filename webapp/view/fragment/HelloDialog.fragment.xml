@@ -1,0 +1,17 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<Dialog
+		id="helloDialog"
+		title="{i18n>titleHelloDialogDialog}"
+		class="sapUiContentPadding">
+		<content>
+			<Title level="H1" text="{i18n>textHelloDialogText}"/>
+		</content>
+		<buttons>
+			<Button
+				text="{i18n>textCloseHelloDialogButton}"
+				press=".onCloseHelloDialog"/>
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>

@@ -1,0 +1,17 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<SelectDialog
+		id="categoryFilterDialog"
+		title="{i18n>titleCategoryFilterSelectDialog}"
+		noDataText="{i18n>noDataCategoryFilterSelectDialog}"
+		search=".handleSearch"
+		confirm=".handleClose"
+		cancel=".handleClose"
+		items="{productsStats>/ProductCollectionStats/Filters/0/values}">
+		<StandardListItem
+			title="{productsStats>text}"
+			description="{productsStats>data}"
+			type="Active"/>
+	</SelectDialog>
+</core:FragmentDefinition>

@@ -1,0 +1,54 @@
+<mvc:View
+	controllerName="com.chlv.samples.controller.panel.FragmentsPanel"
+	xmlns="sap.m"
+	xmlns:l="sap.ui.layout"
+	xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc">
+	<Panel
+		id="fragmentsPanel"
+		headerText="{i18n>textFragmentsPanel}"
+		width="100%"
+		expandable="true"
+		expanded="false">
+		<!-- Local -->
+		<VBox id="localContainer" class="sapUiTinyMarginTopBottom customBorderPadding">
+			<Title text="Local"/>
+			<Image id="localRocket" src="image/rocket.png" alt="Local rocket"/>
+		</VBox>
+		<!-- Programmatically -->
+		<VBox id="programmaticallyContainer0" class="sapUiTinyMarginTopBottom customBorderPadding">
+			<Title text="id = &quot;&quot;"/>
+			<Button text="{i18n>textFragmentInstantiationButton}" press=".onFragmentInstantiation(0)"/>
+		</VBox>
+		<VBox id="programmaticallyContainer1" class="sapUiTinyMarginTopBottom customBorderPadding">
+			<Title text="id = &quot;myFragment&quot;"/>
+			<Button text="{i18n>textFragmentInstantiationButton}" press=".onFragmentInstantiation(1)"/>
+		</VBox>
+		<VBox id="programmaticallyContainer2" class="sapUiTinyMarginTopBottom customBorderPadding">
+			<Title text="id = this.getView().getId()"/>
+			<Button text="{i18n>textFragmentInstantiationButton}" press=".onFragmentInstantiation(2)"/>
+		</VBox>
+		<VBox id="programmaticallyContainer3" class="sapUiTinyMarginTopBottom customBorderPadding">
+			<Title text="id = this.createId(&quot;myFragment&quot;)"/>
+			<Button text="{i18n>textFragmentInstantiationButton}" press=".onFragmentInstantiation(3)"/>
+		</VBox>
+		<!-- Declarative -->
+		<VBox id="declarativeContainer0" class="sapUiTinyMarginTopBottom customBorderPadding">
+			<Title text="Declarative way without id"/>
+			<core:Fragment fragmentName="com.chlv.samples.view.fragment.Rocket" type="XML"/>
+		</VBox>
+		<VBox id="declarativeContainer1" class="sapUiTinyMarginTopBottom customBorderPadding">
+			<Title text="Declarative way with id = &quot;myFragment&quot;"/>
+			<core:Fragment id="myFragment" fragmentName="com.chlv.samples.view.fragment.Rocket" type="XML"/>
+		</VBox>
+		<!-- Address -->
+		<core:Fragment fragmentName="com.chlv.samples.view.fragment.RelativeAddress" type="XML"/>
+		<core:Fragment id="relativeAddressFragment" fragmentName="com.chlv.samples.view.fragment.RelativeAddress" type="XML"/>
+		<!-- Dialog -->
+		<VBox>
+			<Button text="{i18n>textOpenHelloDialogButton}" press=".onOpenHelloDialog"/>
+		</VBox>
+		<!-- Category Filter -->
+		<core:Fragment id="productsTableWithCategoryFilter" fragmentName="com.chlv.samples.view.fragment.ProductsTable" type="XML"/>
+	</Panel>
+</mvc:View>
