@@ -1,0 +1,36 @@
+<mvc:View
+	controllerName="com.chlv.samples.controller.panel.FragmentsPanel"
+	xmlns="sap.m"
+	xmlns:l="sap.ui.layout"
+	xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc">
+	<Panel
+		id="fragmentsPanel"
+		headerText="{i18n>textFragmentsPanel}"
+		width="100%"
+		expandable="true"
+		expanded="false">
+		<!-- Local -->
+		<VBox id="localContainer" class="sapUiTinyMarginTopBottom customBorderPadding">
+			<Title text="Local"/>
+			<Image id="localRocket" src="image/rocket.png" alt="Local rocket"/>
+		</VBox>
+		<!-- Programmatically -->
+		<VBox id="programmaticallyContainer0" class="sapUiTinyMarginTopBottom customBorderPadding">
+			<Title text="id = &quot;&quot;"/>
+			<Button text="{i18n>textFragmentInstantiationButton}" press=".onFragmentInstantiation(0)"/>
+		</VBox>
+		<VBox id="programmaticallyContainer1" class="sapUiTinyMarginTopBottom customBorderPadding">
+			<Title text="id = &quot;myFragment&quot;"/>
+			<Button text="{i18n>textFragmentInstantiationButton}" press=".onFragmentInstantiation(1)"/>
+		</VBox>
+		<VBox id="programmaticallyContainer2" class="sapUiTinyMarginTopBottom customBorderPadding">
+			<Title text="id = this.getView().getId()"/>
+			<Button text="{i18n>textFragmentInstantiationButton}" press=".onFragmentInstantiation(2)"/>
+		</VBox>
+		<VBox id="programmaticallyContainer3" class="sapUiTinyMarginTopBottom customBorderPadding">
+			<Title text="id = this.createId(&quot;myFragment&quot;)"/>
+			<Button text="{i18n>textFragmentInstantiationButton}" press=".onFragmentInstantiation(3)"/>
+		</VBox>
+	</Panel>
+</mvc:View>

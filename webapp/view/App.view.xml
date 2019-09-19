@@ -45,6 +45,9 @@
 						
 						<!-- Dynamic Binding Panel -->
 						<mvc:XMLView id="dynamicBindingView" viewName="com.chlv.samples.view.panel.DynamicBindingPanel"/>
+						
+						<!-- Fragments Panel -->
+						<mvc:XMLView id="fragmentsView" viewName="com.chlv.samples.view.panel.FragmentsPanel"/>
 					</content>
 				</Page>
 			</pages>
