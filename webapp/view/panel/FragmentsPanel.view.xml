@@ -44,5 +44,9 @@
 		<!-- Address -->
 		<core:Fragment fragmentName="com.chlv.samples.view.fragment.RelativeAddress" type="XML"/>
 		<core:Fragment id="relativeAddressFragment" fragmentName="com.chlv.samples.view.fragment.RelativeAddress" type="XML"/>
+		<!-- Dialog -->
+		<VBox>
+			<Button text="{i18n>textOpenHelloDialogButton}" press=".onOpenHelloDialog"/>
+		</VBox>
 	</Panel>
 </mvc:View>

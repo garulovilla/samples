@@ -52,6 +52,28 @@ sap.ui.define([
 				oContainerInstantiation.addItem(oContent);
 				oContainerInstantiation.addItem(new sap.m.Text({ text: `#${oContent.getId()}` }));
 			});
+		},
+		
+		onOpenHelloDialog: function () {
+			var oView = this.getView(),
+				oHelloDialog = this.byId("helloDialog");
+				
+			if (!oHelloDialog) {
+				Fragment.load({
+					id: oView.getId(),
+					name: "com.chlv.samples.view.fragment.HelloDialog",
+					controller: this
+				}).then(function (oDialog) {
+					oView.addDependent(oDialog);
+					oDialog.open();
+				});
+			} else {
+				oHelloDialog.open();
+			}
+		},
+
+		onCloseHelloDialog: function () {
+			this.byId("helloDialog").close();
 		}
 	});
 
