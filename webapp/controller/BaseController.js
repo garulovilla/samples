@@ -1,9 +1,45 @@
 sap.ui.define([
-	"sap/ui/core/mvc/Controller"
-], function(Controller) {
+	"sap/ui/core/mvc/Controller",
+	"sap/base/Log"
+], function(Controller, Log) {
 	"use strict";
 	
 	return Controller.extend("com.chlv.samples.controller.BaseController", {
+		
+		// Lifecycle Hooks
+		// ------------------------------------------------------------------------------------------------------------------------
+		
+		/**
+		 * Lifecycle hook init
+		 * @public
+		 */
+		onInit: function() {
+			Log.info(`onInit - ${this.getView().getId()}`);
+		},
+		
+		/**
+		 * Lifecycle hook before rendering
+		 * @public
+		 */
+		onBeforeRendering: function() {
+			Log.info(`onBeforeRendering - ${this.getView().getId()}`);
+		},
+		
+		/**
+		 * Lifecycle hook after rendering
+		 * @public
+		 */
+		onAfterRendering: function() {
+			Log.info(`onAfterRendering - ${this.getView().getId()}`);
+		},
+		
+		/**
+		 * Lifecycle hook exit
+		 * @public
+		 */
+		onExit: function() {
+			Log.info(`onExit - ${this.getView().getId()}`);
+		},
 		
 		/**
 		 * Convenience method for getting the view model by name.

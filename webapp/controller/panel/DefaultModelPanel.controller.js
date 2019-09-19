@@ -9,6 +9,8 @@ sap.ui.define([
 		// ------------------------------------------------------------------------------------------------------------------------
 		
 		onBeforeRendering:  function () {
+			BaseController.prototype.onBeforeRendering.apply(this, arguments);
+			
 			var bEnable = this.getModel().getProperty("/enabled");
 			
 			// Set text toogle controls button

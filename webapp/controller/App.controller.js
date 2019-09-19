@@ -13,6 +13,8 @@ sap.ui.define([
 		// ------------------------------------------------------------------------------------------------------------------------
 
 		onInit: function () {
+			BaseController.prototype.onInit.apply(this, arguments);
+			
 			var oView = this.getView();
 
 			// Data for default model
