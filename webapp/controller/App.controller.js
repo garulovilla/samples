@@ -39,11 +39,6 @@ sap.ui.define([
 			oModel.setDefaultBindingMode("OneWay");
 			oView.setModel(oModel);
 
-			// Set products model
-			var oProductCollection = new JSONModel("model/ProductCollection.json");
-			oProductCollection.setDefaultBindingMode("OneWay");
-			oView.setModel(oProductCollection, "products");
-
 			// Set formatting model
 			var oFormattingModel = new JSONModel({
 				gender: "F",
